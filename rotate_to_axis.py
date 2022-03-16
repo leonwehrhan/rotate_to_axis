@@ -128,8 +128,14 @@ if __name__ == '__main__':
 
     # Get input file argument
     parser = argparse.ArgumentParser()
-    parser.add_argument('f', help='input structure file')
+    parser.add_argument('f', help='input structure file.')
+    parser.add_argument('ids', help='ids of two atoms as "id1 id2".')
     args = parser.parse_args()
     f = args.f
+    vec = args.ids.split(' ')
 
+    # load trajectory
     t = md.load(f)
+
+    # rotate structure
+    t_rot = rotate_to_axis(t, vec, axis='z')
