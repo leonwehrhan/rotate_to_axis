@@ -5,14 +5,14 @@ import argparse
 
 def rotate_structure(t, ang, rot_axis):
     '''
-    Rotate molecular structure around rotation axis to given angle.
+    Rotate molecular structure around rotation axis using an Euler-Rodriguez rotation matrix.
 
     Parameters
     ----------
     t : md.Trajectory
         Molecular structure as mdtraj trajectory with one frame.
     ang : float
-        Angle in radians.
+        Angle of rotation in radians.
     rot_axis : np.ndarray
         Vector of rotation axis
     '''
