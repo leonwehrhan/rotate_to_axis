@@ -1,5 +1,6 @@
 import numpy as np
 import mdtraj as md
+import argparse
 
 
 def rotate_structure(t, ang, rot_axis):
@@ -121,3 +122,14 @@ def rotate_to_axis(t, vec, axis='z'):
     t_new = rotate_structure(t, ang, rot_axis)
 
     return t_new
+
+
+if __name__ == '__main__':
+
+    # Get input file argument
+    parser = argparse.ArgumentParser()
+    parser.add_argument('f', help='input structure file')
+    args = parser.parse_args()
+    f = args.f
+
+    t = md.load(f)
