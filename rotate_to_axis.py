@@ -124,6 +124,29 @@ def rotate_to_axis(t, vec, axis='z'):
     return t_new
 
 
+def translate_structure():
+    '''
+    Translate molecular structure.
+
+    Parameters
+    ----------
+    t : md.Trajectory
+        Molecular trajectory.
+    vec : np.ndarray
+        Vector by which the trajectory will be translated.
+    '''
+    if vec.shape != (3,):
+        raise ValueError(f'vec is shape {vec.shape}, must be shape (3,)')
+
+    # Create new trajectory with translated coordinates
+    t_new = t
+    t_new.xyz += vec
+
+    return t_new
+    
+
+
+
 if __name__ == '__main__':
 
     # Get input file argument
