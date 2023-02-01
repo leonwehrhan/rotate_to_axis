@@ -60,20 +60,6 @@ def rotate_to_axis(t, vec, axis='z'):
         Coordinate axis to align on.
     '''
 
-    # Verify that vec is np.ndarray or list with two int or str elements
-    if type(vec) == np.ndarray:
-        if vec.shape != (3,):
-            raise ValueError(f'vec is shape {vec.shape}, must be shape (3,)')
-    if type(vec) == list:
-        if len(vec) != 2:
-            raise ValueError(f'vec has {len(vec)} elements, must have two.')
-        if type(vec[0]) != type(vec[1]):
-            raise ValueError('vec holds two elements of different type')
-        if type(vec[0]) != int and type(vec[0]) != str:
-            raise ValueError('Elements in vec must be int or str')
-    else:
-        raise ValueError(f'vec is {type(vec)}, must be np.ndarray or list')
-
     # Get coordinate axis, raise error if not x, y or z
     if axis == 'x':
         axis_coord = np.array([1, 0, 0])
