@@ -124,7 +124,7 @@ def rotate_to_axis(t, vec, axis='z'):
     return t_new
 
 
-def translate_structure():
+def translate_structure(t, vec):
     '''
     Translate molecular structure.
 
