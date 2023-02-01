@@ -10,14 +10,12 @@ def rotate_structure(t, ang, rot_axis):
     Parameters
     ----------
     t : md.Trajectory
-        Molecular structure as mdtraj trajectory with one frame.
+        Molecular structure as mdtraj trajectory.
     ang : float
         Angle of rotation in radians.
     rot_axis : np.ndarray
         Vector of rotation axis
     '''
-    if t.n_frames != 1:
-        raise ValueError(f't has {t.n_frames} frames, must have 1.')
 
     # normalize rotation axis
     rot_axis = rot_axis / np.linalg.norm(rot_axis)
@@ -37,8 +35,9 @@ def rotate_structure(t, ang, rot_axis):
 
     # Create new trajectory with rotated coordinates
     t_new = t
-    for i in range(t_new.n_atoms):
-        t_new.xyz[0][i] = np.dot(R, t_new.xyz[0][i])
+    for i_frame, frame in enumerate(t_new.xyz):
+        frame_new = np.dot(R, frame.T).T
+        t_new.xyz[i_frame] = frame_new
 
     return t_new
 
@@ -60,8 +59,6 @@ def rotate_to_axis(t, vec, axis='z'):
     axis : "x", "y" or "z"
         Coordinate axis to align on.
     '''
-    if t.n_frames != 1:
-        raise ValueError(f't has {t.n_frames} frames, must have 1.')
 
     # Verify that vec is np.ndarray or list with two int or str elements
     if type(vec) == np.ndarray:
